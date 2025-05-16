@@ -51,7 +51,6 @@
 </head>
 <body>
   <!-- Navbar -->
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="/home">نور - مصمم جرافيك</a>
@@ -142,7 +141,20 @@
   </div>
 </section>
 
- 
+<!--gallery-->>
+   <section id="gallery" class="py-5">
+  <div class="container ">
+    <h2 class="text-center mb-4">معرض أعمالي</h2>
+    <div class="row g-3 border rounded-2 border-primary">
+      {% for img in images %}
+        <div class="col-6 col-md-3">
+           <img src="{{ img.image_url }}" class="img-fluid rounded shadow-sm gallery-img" alt="عمل" style="height: 250px; width: 100%; object-fit: cover;" >
+        </div>
+     {% endfor %}
+    </div>
+  </div>
+</section>
+
   <!-- معرض أعمالي -->
 <section class="py-5">
   <div class="container">
