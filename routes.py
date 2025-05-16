@@ -14,9 +14,9 @@ import cloudinary
 import cloudinary.uploader
 
 cloudinary.config(
-    cloud_name='dc9jmzfbk',
-    api_key='537345147771925',
-    api_secret='_8Rd5rpd2Zd7yu_qgzmLud3CXwQ'
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET')
 )
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
