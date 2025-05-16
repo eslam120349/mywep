@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ 'ar' if language == 'ar' else 'en' }}" {{ 'dir="rtl"' if language == 'ar' else '' }} data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 Forbidden - Teacher's Lesson Planner</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <style>
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .error-container {
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .error-icon {
+            font-size: 5rem;
+            color: #dc3545;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="error-container">
+            <i class="bi bi-shield-lock error-icon"></i>
+            <h1 class="mb-4">403 - {% if language == 'ar' %}غير مصرح{% else %}Forbidden{% endif %}</h1>
+            <p class="lead mb-4">{% if language == 'ar' %}ليس لديك صلاحية للوصول إلى هذه الصفحة.{% else %}You don't have permission to access this page.{% endif %}</p>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                <i class="bi bi-house-door me-2"></i>{% if language == 'ar' %}العودة إلى لوحة التحكم{% else %}Back to Dashboard{% endif %}
+            </a>
+        </div>
+    </main>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
