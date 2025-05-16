@@ -10,7 +10,14 @@ from werkzeug.utils import secure_filename
 import os
 import uuid
 import random
+import cloudinary
+import cloudinary.uploader
 
+cloudinary.config(
+    cloud_name='dc9jmzfbk',
+    api_key='537345147771925',
+    api_secret='_8Rd5rpd2Zd7yu_qgzmLud3CXwQ'
+)
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -224,25 +231,26 @@ def add_project():
     if request.method == "POST":
         title = request.form["title"]
         description = request.form["description"]
-        images = request.files.getlist("images")  # قائمة الصور المرفوعة
+        images = request.files.getlist("images")
 
-        # إنشاء مشروع جديد أولاً
         project = Project(title=title, description=description)
         db.session.add(project)
-        db.session.flush()  # علشان ناخد id المشروع قبل commit
+        db.session.flush()
 
         for image in images:
             if image and allowed_file(image.filename):
-                ext = image.filename.rsplit('.', 1)[1].lower()
-                unique_filename = f"{uuid.uuid4().hex}.{ext}"
-                filename = secure_filename(unique_filename)
-                image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                image.save(image_path)
+                try:
+                    # رفع الصورة لـ Cloudinary
+                    upload_result = cloudinary.uploader.upload(image)
+                    image_url = upload_result["secure_url"]
 
-                image_url = url_for('static', filename='uploads/' + filename)
+                    # حفظ رابط الصورة في قاعدة البيانات
+                    project_image = ProjectImage(image_url=image_url, project_id=project.id)
+                    db.session.add(project_image)
 
-                project_image = ProjectImage(image_url=image_url, project_id=project.id)
-                db.session.add(project_image)
+                except Exception as e:
+                    flash("حدث خطأ أثناء رفع الصور: " + str(e), "danger")
+                    return render_template("admin/add_project.html")
             else:
                 flash("صيغة واحدة أو أكثر من الصور غير مدعومة!", "danger")
                 return render_template("admin/add_project.html")
@@ -252,6 +260,7 @@ def add_project():
         return redirect(url_for("projects"))
 
     return render_template("admin/add_project.html")
+
 
 @app.route("/admin/delete_project/<int:project_id>", methods=["POST"])
 @login_required
