@@ -69,9 +69,6 @@
                 <td>{{ msg.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                 <td>{{ msg.is_repl }}</td>
                 <td>
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ msg.user.email }}" target="_blank" class="btn btn-sm btn-primary">
-                        Reply
-                    </a>
                     <button onclick="markAsReplied('{{ msg.id }}', '{{ msg.user.email }}')" class="btn btn-sm btn-primary">
                     Reply
                     </button>
