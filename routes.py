@@ -93,6 +93,14 @@ def send_massege():
     
     return render_template('contact.html', form=form, has_unreplied=has_unreplied)
 
+@app.route('/reply/<int:msg_id>', methods=['POST'])
+def mark_as_replied(msg_id):
+    msg = Message.query.get_or_404(msg_id)
+    msg.is_repl = True
+    db.session.commit()
+    return '', 204  # بنرجع رد فارغ يعني OK بدون محتوى
+
+
 @app.route('/api/register', methods=['POST'])
 def register_api():
     data = request.get_json()
@@ -346,3 +354,4 @@ def page_not_found(error):
         return redirect(url_for('edit_lesson_form', lesson_id=lesson.id))
 
     return render_template('create_lesson.html', form=form, language=language)
+

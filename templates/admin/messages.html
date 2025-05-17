@@ -72,6 +72,9 @@
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ msg.user.email }}" target="_blank" class="btn btn-sm btn-primary">
                         Reply
                     </a>
+                    <button onclick="markAsReplied('{{ msg.id }}', '{{ msg.user.email }}')" class="btn btn-sm btn-primary">
+                    Reply
+                    </button>
                 </td>
             </tr>
             {% endfor %}
@@ -88,5 +91,21 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function markAsReplied(msgId, email) {
+        fetch(`/reply/${msgId}`, {
+            method: 'POST'
+        })
+        .then(response => {
+            if (response.ok) {
+                // بعد التعديل في الداتا بيز، روح على Gmail
+                window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`, '_blank');
+            } else {
+                alert('Something went wrong.');
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
