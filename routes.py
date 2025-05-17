@@ -28,6 +28,8 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     return render_template('index_new.html')
 
 @app.route('/project/<int:project_id>')
