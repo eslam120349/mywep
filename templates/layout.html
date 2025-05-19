@@ -48,7 +48,6 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <!-- القائمة على اليمين -->
             <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-2">
-                {% if current_user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == '/home' %}active{% endif %}" href="/home">الرئيسية</a>
                     </li>
@@ -61,7 +60,6 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="/contact">تواصل معي</a>
                     </li>
-                {% endif %}
             </ul>
 
             <!-- القائمة على الشمال -->
