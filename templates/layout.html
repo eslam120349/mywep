@@ -77,9 +77,23 @@
                             مرحباً، {{ current_user.name }}!
                         </span>
                     </li>
+                    {% if current_user.is_admin %}
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/admin/messages">
+                    {% if has_unreplied %}
+                        <i class="bi bi-bell-fill"></i>
+                        {% else %}
+                        <i class="bi bi-bell"></i>
+                        {% endif %}
+                        </a></li>
+                </ul>
+                    {% endif %}
+
                     <li class="nav-item">
                         <a href="{{ url_for('logout') }}" class="btn btn-outline-light">{% if language == 'ar' %}تسجيل الخروج{% else %}Logout{% endif %}</a>
                     </li>
+
+
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="/login">تسجيل الدخول</a>
