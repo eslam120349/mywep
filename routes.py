@@ -30,7 +30,7 @@ def allowed_file(filename):
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    return render_template('index_new.html')
+    return redirect(url_for('home'))
 
 @app.route('/project/<int:project_id>')
 def view_project(project_id):
@@ -39,7 +39,6 @@ def view_project(project_id):
 
 
 @app.route('/home')
-@login_required
 def home():
     projects = Project.query.order_by(Project.created_at.desc()).limit(3).all()
     all_images = ProjectImage.query.all()
@@ -48,20 +47,17 @@ def home():
     return render_template('home.html',projects=projects , images=random_images , has_unreplied=has_unreplied)
 
 @app.route('/projects')
-@login_required
 def projects():
     projects = Project.query.order_by(Project.created_at.desc()).all()
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
     return render_template('projects.html',projects=projects, has_unreplied=has_unreplied)
 
 @app.route('/services')
-@login_required
 def services():
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
     return render_template('services.html', has_unreplied=has_unreplied)
 
 @app.route('/contact')
-@login_required
 def contact():
     form=MessageForm()
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
@@ -210,24 +206,6 @@ def admin_required(f):
             abort(404)  # Forbidden
         return f(*args, **kwargs)
     return decorated_function
-
-# Admin routes
-@app.route('/admin', methods=['GET'])
-@login_required
-@admin_required
-def admin_dashboard():
-    language = session.get('language', 'en')
-
-    # Get statistics
-    total_users = User.query.count()
-
-    # Get recent users and lessons
-    recent_users = User.query.order_by(User.id.desc()).limit(5).all()
-
-    return render_template('admin/dashboard.html',
-                          language=language,
-                          total_users=total_users,
-                          recent_users=recent_users)
 
 
 @app.route("/admin/add_project", methods=["GET", "POST"])
