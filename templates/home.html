@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>صفحه بورتوفوليو</title>
+{% extends "layout.html" %}
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css"/>
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+{% block title %}home - My Portfolio{% endblock %}
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
-
-  <!-- Custom CSS -->
-  <style>
+{% block extra_css %}
     .stat-card{
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -46,38 +35,10 @@
       transform: scale(1.05);
       box-shadow: 0 20px 40px rgba(187, 3, 211, 0.377);
     }
-
-  </style>
-</head>
+{% endblock %}
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="/home">نور - مصمم جرافيك</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ">
-          <li class="nav-item"><a class="nav-link active" href="/home">الرئيسية</a></li>
-          <li class="nav-item"><a class="nav-link " href="/projects">أعمالي</a></li>
-          <li class="nav-item"><a class="nav-link" href="/services">خدماتي</a></li>
-          <li class="nav-item"><a class="nav-link" href="/contact">تواصل معي</a></li>
-        </ul>
-              {% if current_user.is_admin %}
-       <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="/admin/messages">
-          {% if has_unreplied %}
-            <i class="bi bi-bell-fill"></i>
-          {% else %}
-          <i class="bi bi-bell"></i>
-          {% endif %}
-          </a></li>
-        </ul>
-      {% endif %}
-      </div>
-    </div>
-  </nav>
+
+{% block content %}
 
   <!-- Header -->
   <header class="py-5 text-center">
@@ -156,17 +117,4 @@
   </div>
 </section>
 
-
-
-
-  <!-- Footer -->
-  <footer class="text-white text-center py-3 mt-4">
-    <div class="container">
-      <p>© 2025 نور - مصمم جرافيك. جميع الحقوق محفوظة.</p>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
