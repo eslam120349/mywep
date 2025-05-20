@@ -335,3 +335,23 @@ def page_not_found(error):
 
     return render_template('create_lesson.html', form=form, language=language)
 
+@app.route('/sitemap.xml')
+def sitemap():
+    base_url = request.url_root.strip('/')
+    pages = [
+        {'url': base_url + url_for('index'), 'lastmod': datetime.now().strftime('%Y-%m-%d')},
+        {'url': base_url + url_for('home'), 'lastmod': datetime.now().strftime('%Y-%m-%d')},
+        {'url': base_url + url_for('projects'), 'lastmod': datetime.now().strftime('%Y-%m-%d')},
+        {'url': base_url + url_for('services'), 'lastmod': datetime.now().strftime('%Y-%m-%d')},
+        {'url': base_url + url_for('contact'), 'lastmod': datetime.now().strftime('%Y-%m-%d')},
+    ]
+
+    for project in Project.query.all():
+        project_url = base_url + url_for('view_project', project_id=project.id)
+        pages.append({
+            'url': project_url,
+            'lastmod': project.created_at.strftime('%Y-%m-%d')
+        })
+
+    sitemap_xml = render_template('sitemap.xml', pages=pages)
+    return Response(sitemap_xml, mimetype='application/xml')
