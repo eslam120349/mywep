@@ -11,13 +11,17 @@
     <meta property="og:image" content="https://res.cloudinary.com/dc9jmzfbk/image/upload/v1747406484/Screenshot_2025-05-16_092555_bshhaf.png" />
     <meta property="og:url" content="{{ request.url }}" />
 
-
     <title>{% block title %}My Portfolio {% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- ملف الستايل المخصص -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dark-theme.css') }}">
+    
     <!-- Custom CSS -->
+     
     <style>
         .navbar-brand {
             font-weight: bold;
