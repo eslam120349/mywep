@@ -3,5 +3,5 @@ import routes  # noqa: F401
 
 if __name__ == "__main__":
     # Glitch يحتاج هذه الإعدادات
-    app.run(host='0.0.0.0', port=300 , debug = True  )
+    app.run(host='0.0.0.0', port=300 , debug = False  )
 
