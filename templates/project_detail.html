@@ -4,10 +4,6 @@
 
 
 {% block extra_css %}
-    .img {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
     .project-image {
   width: 200px;
   margin: 10px;
@@ -16,13 +12,10 @@
   transition: transform 0.3s;
 }
 .project-image:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(154, 12, 173, 0.15);
 }
-    .img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+
 {% endblock %}
 
 {% block content %}
