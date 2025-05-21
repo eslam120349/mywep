@@ -8,6 +8,17 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
+    .project-image {
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.project-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
     .img:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -24,7 +35,7 @@
 
 <div class="gallery">
     {% for img in project.images %}
-        <img src="{{ img.image_url }}" alt="صورة المشروع" width="200" style="margin:10px;">
+        <img src="{{ img.image_url }}" alt="صورة المشروع" width="200" style="margin:10px; " class="project-image">
     {% endfor %}
 </div>
 
