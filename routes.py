@@ -44,25 +44,37 @@ def home():
     all_images = ProjectImage.query.all()
     random_images = random.sample(all_images, min(6, len(all_images)))  # اختار 6 صور عشوائيًا
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
-    return render_template('home.html',projects=projects , images=random_images , has_unreplied=has_unreplied)
+        
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
+    return render_template('home.html',projects=projects , images=random_images , has_unreplied=has_unreplied ,language=language)
 
 @app.route('/projects')
 def projects():
     projects = Project.query.order_by(Project.created_at.desc()).all()
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
-    return render_template('projects.html',projects=projects, has_unreplied=has_unreplied)
+        
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
+    return render_template('projects.html',projects=projects, has_unreplied=has_unreplied , language=language)
 
 @app.route('/services')
 def services():
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
-    return render_template('services.html', has_unreplied=has_unreplied)
+
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
+    return render_template('services.html', has_unreplied=has_unreplied ,language=language)
 
 @app.route('/contact')
 def contact():
     form=MessageForm()
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
+    
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
 
-    return render_template('contact.html',form=form, has_unreplied=has_unreplied)
+    return render_template('contact.html',form=form, has_unreplied=has_unreplied ,language=language)
 
 @app.route('/send_massege', methods=['GET', 'POST'])
 @login_required
@@ -70,6 +82,8 @@ def send_massege():
     form = MessageForm()
     has_unreplied = Message.query.filter_by(is_repl=False).first() is not None
 
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
     if form.validate_on_submit():
         print("Form is valid ✅")
         print("Message content:", form.message.data)
@@ -89,7 +103,7 @@ def send_massege():
     else:
         print("Form errors:", form.errors)
     
-    return render_template('contact.html', form=form, has_unreplied=has_unreplied)
+    return render_template('contact.html', form=form, has_unreplied=has_unreplied ,language=language)
 
 @app.route('/reply/<int:msg_id>', methods=['POST'])
 def mark_as_replied(msg_id):
@@ -170,6 +184,9 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
+    
     if current_user.is_authenticated:
         return redirect(url_for('home'))
 
@@ -184,7 +201,7 @@ def register():
         flash('Registration successful! You can now log in.')
         return redirect(url_for('login'))
 
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form ,language=language)
 
 @app.route('/logout')
 def logout():
@@ -246,8 +263,11 @@ def add_project():
         db.session.commit()
         flash("تمت إضافة المشروع مع الصور!", "success")
         return redirect(url_for("projects"))
+    
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
 
-    return render_template("admin/add_project.html")
+    return render_template("admin/add_project.html" , language=language)
 
 
 @app.route("/admin/delete_project/<int:project_id>", methods=["POST"])
@@ -276,7 +296,9 @@ def delete_project(project_id):
 @admin_required
 def admin_messages():
     messages = Message.query.order_by(Message.id.desc()).all()
-    return render_template('admin/messages.html', messages=messages)
+    # Get the language from session, default to English
+    language = session.get('language', 'en')
+    return render_template('admin/messages.html', messages=messages,language=language)
 
 @app.route('/admin/logout')
 @login_required

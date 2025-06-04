@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{{ 'ar' if language == 'ar' else 'en' }}" dir="{{ 'rtl' if language == 'ar' else 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +51,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" dir="rtl">
     <div class="container">
-        <a class="navbar-brand" href="/" data-i18n="mywep">موقعي</a>
+        <a class="navbar-brand" href="/">{% if language == 'ar' %}موقعي{% else %}mywep{% endif %}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -60,26 +60,36 @@
             <!-- القائمة على اليمين -->
             <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-2">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/home' %}active{% endif %}" href="/home" data-i18n="home">الرئيسية</a>
+                        <a class="nav-link {% if request.path == '/home' %}active{% endif %}" href="/home" data-i18n="home">{% if language == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/projects' %}active{% endif %}" href="/projects" data-i18n="projects">أعمالي</a>
+                        <a class="nav-link {% if request.path == '/projects' %}active{% endif %}" href="/projects" data-i18n="projects">{% if language == 'ar' %}أعمالي{% else %}projects{% endif %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/services' %}active{% endif %}" href="/services" data-i18n="services">خدماتي</a>
+                        <a class="nav-link {% if request.path == '/services' %}active{% endif %}" href="/services" data-i18n="services">{% if language == 'ar' %}خدماتي{% else %}my services {% endif %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="/contact" data-i18n="contact">تواصل معي</a>
+                        <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="/contact" data-i18n="contact">{% if language == 'ar' %}تواصل معي{% else %}conect with me {% endif %}</a>
                     </li>
             </ul>
 
             <!-- القائمة على الشمال -->
             <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-2">
-                <h3 class="text-primary" data-i18n="selectLanguage">Select a language</h3>
-                <select class="p-1 mt-2">
-                <option value="en" data-i18n="english" selected>English</option>
-                <option value="ar" data-i18n="arabic">Arabic</option>
-                </select>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if language == 'ar' %}
+                                <i class="bi bi-globe"></i> العربية
+                            {% else %}
+                                <i class="bi bi-globe"></i> English
+                            {% endif %}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('set_language', language='en') }}">English</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('set_language', language='ar') }}">العربية</a></li>
+                        </ul>
+                    </li>
+
                 {% if current_user.is_authenticated %}
 
                 {% if current_user.is_admin %}
@@ -96,21 +106,21 @@
 
                     <li class="nav-item">
                         <span class="navbar-text text-white">
-                            مرحباً، {{ current_user.name }}!
+                            {% if language == 'ar' %}مرحباً،{% else %}hi{% endif %}{{ current_user.name }}!
                         </span>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ url_for('logout') }}" class="btn btn-outline-light" data-i18n="logout">تسجيل الخروج</a>
+                        <a href="{{ url_for('logout') }}" class="btn btn-outline-light" data-i18n="logout">{% if language == 'ar' %}تسجيل الخروج{% else %}logout{% endif %}</a>
                     </li>
 
 
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">تسجيل الدخول</a>
+                        <a class="nav-link" href="/login">{% if language == 'ar' %}تسجيل الدخول{% else %}login{% endif %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">التسجيل</a>
+                        <a class="nav-link" href="/register">{% if language == 'ar' %}التسجيل{% else %}register{% endif %}</a>
                     </li>
                 {% endif %}
             </ul>
@@ -128,14 +138,13 @@
   <!-- Footer -->
   <footer class="text-white text-center py-3 mt-4">
     <div class="container">
-      <p>© 2025 نور - مصمم جرافيك. جميع الحقوق محفوظة.</p>
+      <p>{% if language == 'ar' %}© 2025 نور - مصمم جرافيك. جميع الحقوق محفوظة.{% else %}© 2025 Noor - Graphic Designer. All rights reserved.{% endif %}</p>
     </div>
   </footer>
 
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}" type="module"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>
