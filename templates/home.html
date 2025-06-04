@@ -43,30 +43,30 @@
   <header class="py-5 text-center">
     <div class="container">
       <img src="https://res.cloudinary.com/dc9jmzfbk/image/upload/v1747406484/Screenshot_2025-05-16_092555_bshhaf.png" alt="صورة المصمم" class="rounded-circle mb-3" width="150">
-      <h1 class="fw-bold">أهلاً! أنا نور</h1>
-      <p class="lead">مصممه جرافيك محترفه - أصمم أفكارك بأناقة وإبداع</p>
+      <h1 class="fw-bold">{% if language == 'ar' %}أهلاً! أنا نور{% else %}hi i am nour{% endif %}</h1>
+      <p class="lead">{% if language == 'ar' %}مصممه جرافيك محترفه - أصمم أفكارك بأناقة وإبداع{% else %}Professional graphic designer - I design your ideas with elegance and creativity{% endif %}</p>
     </div>
   </header>
 
   <!-- Skills -->
   <section class="py-5">
     <div class="container ">
-      <h2 class="text-center mb-4">مهاراتي</h2>
+      <h2 class="text-center mb-4">{% if language == 'ar' %}مهاراتي{% else %}my Skills{% endif %}</h2>
       <div class="row text-center">
         <div class="card stat-card col-md-4 mb-3">
           <i class="bi bi-palette fs-1 text-primary"></i>
-          <h5 class="mt-2">تصميم الشعارات</h5>
-          <p>ابتكار شعارات عصرية ومعبرة للعلامات التجارية.</p>
+          <h5 class="mt-2">{% if language == 'ar' %}تصميم الشعارات{% else %}Logos design{% endif %}</h5>
+          <p>{% if language == 'ar' %}ابتكار شعارات عصرية ومعبرة للعلامات التجارية.{% else %}Creating modern and expressive logos for brands.{% endif %}</p>
         </div>
         <div class="card stat-card col-md-4 mb-3">
           <i class="bi bi-image fs-1 text-success"></i>
-          <h5 class="mt-2">تصميم سوشيال ميديا</h5>
-          <p>تصاميم جذابة لحملات التواصل الاجتماعي.</p>
+          <h5 class="mt-2">{% if language == 'ar' %}تصميم سوشيال ميديا{% else %}Social media design{% endif %}</h5>
+          <p>{% if language == 'ar' %}تصاميم جذابة لحملات التواصل الاجتماعي.{% else %}Attractive designs for social media campaigns.{% endif %}</p>
         </div>
         <div class="card stat-card col-md-4 mb-3">
           <i class="bi bi-file-earmark-image fs-1 text-danger"></i>
-          <h5 class="mt-2">تصميم مطبوعات</h5>
-          <p>بروشورات، بطاقات، بوسترات بجودة عالية للطباعة.</p>
+          <h5 class="mt-2">{% if language == 'ar' %}تصميم مطبوعات{% else %}Publications design{% endif %}</h5>
+          <p>{% if language == 'ar' %}بروشورات، بطاقات، بوسترات بجودة عالية للطباعة.{% else %}High quality brochures, cards, posters for printing.{% endif %}</p>
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@
 <!-- Projects -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center mb-4">أعمالي</h2>
+    <h2 class="text-center mb-4">{% if language == 'ar' %}أعمالي{% else %}my project{% endif %}</h2>
     <div class="row g-2 border rounded-2 border-primary">
       {% for project in projects %}
       <div class="col-6 col-md-4 col-lg-3 d-flex">
@@ -89,7 +89,7 @@
             {% if current_user.is_admin %}
             <form method="POST" action="{{ url_for('delete_project', project_id=project.id) }}">
               <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Are you sure you want to delete this project?');">
-                Delete
+               {% if language == 'ar' %}حذف المشروع{% else %}Delete{% endif %} 
               </button>
             </form>
             {% endif %}
@@ -105,7 +105,7 @@
 <!--gallery-->
    <section id="gallery" class="py-5">
   <div class="container ">
-    <h2 class="text-center mb-4">معرض أعمالي</h2>
+    <h2 class="text-center mb-4">{% if language == 'ar' %}معرض أعمالي{% else %}My work gallery{% endif %}</h2>
     <div class="row g-3 border rounded-2 border-primary">
       {% for img in images %}
         <div class="col-6 col-md-3">

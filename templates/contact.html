@@ -7,17 +7,17 @@
 
 <section class="py-5">
     <div class="container">
-      <h2 class="mb-4">تواصل معنا</h2>
+      <h2 class="mb-4">{% if language == 'ar' %}تواصل معنا{% else %}Contact us{% endif %}</h2>
   
       {% if success %}
-      <div class="alert alert-success">تم إرسال رسالتك بنجاح، سنقوم بالرد عليك قريبًا.</div>
+      <div class="alert alert-success">{% if language == 'ar' %}تم إرسال رسالتك بنجاح، سنقوم بالرد عليك قريبًا.{% else %}Your message has been sent successfully, we will reply to you soon.{% endif %}</div>
       {% endif %}
   
       <form method="POST" action="{{ url_for('send_massege') }}">
         {{ form.hidden_tag() }}
 
         <div class="mb-3">
-          <label for="message" class="form-label">عاوز ايه ابعت رساله و هرد عليك في اقرب وقت</label>
+          <label for="message" class="form-label">{% if language == 'ar' %}عاوز ايه ابعت رساله و هرد عليك في اقرب وقت{% else %}What do you want? Send me a message and I will reply as soon as possible.{% endif %}</label>
          {{ form.message(class="form-control") }}
         </div>
         {{ form.submit(class="btn btn-primary") }}
