@@ -3,213 +3,39 @@
 {% block title %}add_project - My Portfolio{% endblock %}
 
 {% block extra_css %}
-<style>
-  .service-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(154, 12, 173, 0.15);
-  }
-
-  .service-icon {
-    font-size: 3rem;
-    color: #0d6efd;
-  }
-
-  #upload_btn {
-    position: relative;
-    width: 120px;
-    height: 42px;
-    overflow: hidden;
-    padding: 0;
-    border: none;
-  }
-
-  #upload_btn.active {
-    width: 42px;
-    transition: width 0.3s ease;
-  }
-
-  #app {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
-  #arrow {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 38px;
-    height: 38px;
-    background-color: #fff;
-    z-index: 2;
-  }
-
-  #arrow:before,
-  #arrow:after {
-    content: "";
-    position: absolute;
-    top: 18px;
-    width: 10px;
-    height: 2px;
-    background-color: #143240;
-  }
-
-  #arrow:before {
-    right: 17px;
-    transform: rotateZ(-45deg);
-  }
-
-  #arrow:after {
-    right: 11px;
-    transform: rotateZ(45deg);
-  }
-
-  #upload_btn.active #arrow:before {
-    animation: _a 0.4s ease 0.4s forwards, _incHeight 4s ease 1s forwards;
-  }
-
-  #upload_btn.active #arrow:after {
-    animation: _b 0.4s ease 0.4s forwards, _incHeight 4s ease 1s forwards;
-  }
-
-  #success {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 54px;
-    height: 54px;
-    margin: -8px;
-    background-color: #143240;
-    transform: scale(0);
-    border-radius: 50%;
-    z-index: 3;
-  }
-
-  #success i {
-    font-size: 20px;
-    color: #fff;
-    display: block;
-    width: 20px;
-    height: 20px;
-    margin: 17px auto;
-    transform: scale(0);
-  }
-
-  #upload_btn.active #success {
-    animation: _success 0.4s cubic-bezier(0, 0.74, 0.32, 1.21) 5s forwards;
-  }
-
-  #upload_btn.active #success i {
-    animation: _success 0.3s cubic-bezier(0, 0.74, 0.32, 1.21) 5.2s forwards;
-  }
-
-  @keyframes _a {
-    0% {
-      top: 18px;
-      right: 17px;
-      width: 10px;
-      transform: rotateZ(-45deg);
-      background-color: #143240;
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    100% {
-      top: 36px;
-      right: 19px;
-      width: 19px;
-      transform: rotateZ(0deg);
-      background-color: #ffc107;
-    }
-  }
 
-  @keyframes _b {
-    0% {
-      top: 18px;
-      right: 11px;
-      width: 10px;
-      transform: rotateZ(45deg);
-      background-color: #143240;
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(154, 12, 173, 0.15);
     }
-    100% {
-      top: 36px;
-      right: 0;
-      width: 19px;
-      transform: rotateZ(0deg);
-      background-color: #ffc107;
-    }
-  }
 
-  @keyframes _incHeight {
-    0% {
-      top: 36px;
-      height: 2px;
+    .service-icon {
+      font-size: 3rem;
+      color: #0d6efd;
     }
-    25% {
-      top: 31px;
-      height: 8px;
-    }
-    50% {
-      top: 21px;
-      height: 18px;
-    }
-    80% {
-      top: 11px;
-      height: 28px;
-    }
-    100% {
-      top: 0;
-      height: 39px;
-    }
-  }
-
-  @keyframes _success {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-</style>
 {% endblock %}
 
 {% block content %}
+
 <form method="POST" class="container my-5" enctype="multipart/form-data">
   <h2>إضافة مشروع جديد</h2>
-
   <div class="mb-3">
     <label class="form-label">عنوان المشروع</label>
     <input type="text" class="form-control" name="title" required>
   </div>
-
   <div class="mb-3">
     <label class="form-label">رابط الصورة</label>
-    <input type="file" class="form-control" name="images" multiple required>
-  </div>
-
+    <input type="file" name="images" multiple required>
+    </div>
   <div class="mb-3">
     <label class="form-label">وصف المشروع</label>
     <textarea class="form-control" name="description" rows="4" required></textarea>
   </div>
-
-  <button type="submit" id="upload_btn" class="btn btn-primary">
-    <div id="app">
-      <div id="arrow"></div>
-      <div id="success">
-        <i class="fas fa-check-circle"></i>
-      </div>
-    </div>
-    حفظ
-  </button>
+  <button type="submit" class="btn btn-primary">حفظ</button>
 </form>
-{% endblock %}
 
-{% block scripts %}
-<script>
-  document.getElementById('upload_btn').addEventListener('click', function () {
-    this.classList.add('active');
-  });
-</script>
+
 {% endblock %}
