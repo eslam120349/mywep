@@ -107,14 +107,22 @@
   <div class="container ">
     <h2 class="text-center mb-4">{% if language == 'ar' %}معرض أعمالي{% else %}My work gallery{% endif %}</h2>
     <div class="row g-3 border rounded-2 border-primary">
-      {% for img in images %}
+
         <div class="col-6 col-md-3">
-           <img src="{{ img.image_url }}" class="img-fluid rounded shadow-sm gallery-img" alt="عمل" style="height: 250px; width: 100%; object-fit: cover;" >
-        </div>
-     {% endfor %}
+           <img src="https://res.cloudinary.com/dc9jmzfbk/image/upload/v1749916136/u0yde4aenayrwlkw29xk.jpg" alt="عمل" style="height: 250px; width: 100%; object-fit: cover;" >
+        </div>        
+        <div class="col-6 col-md-3">
+           <img src="https://res.cloudinary.com/dc9jmzfbk/image/upload/v1749916136/qm39pknezkf4ebzjm8ju.jpg" alt="عمل" style="height: 250px; width: 100%; object-fit: cover;" >
+        </div> 
+        <div class="col-6 col-md-3">
+           <img src="https://res.cloudinary.com/dc9jmzfbk/image/upload/v1749915973/jjsnhj7moe2ojykhy6eb.jpg" class="img-fluid rounded shadow-sm gallery-img" alt="عمل" style="height: 250px; width: 100%; object-fit: cover;" >
+        </div> 
+        <div class="col-6 col-md-3">
+           <img src="https://res.cloudinary.com/dc9jmzfbk/image/upload/v1749916279/jyi284bvqgkgwkj418ci.jpg" class="img-fluid rounded shadow-sm gallery-img" alt="عمل" style="height: 250px; width: 100%; object-fit: cover;" >
+        </div> 
         <div class="col-6 col-md-3">
            <img src="https://res.cloudinary.com/dc9jmzfbk/image/upload/v1749918915/WhatsApp_Image_2025-06-14_at_6.21.33_PM_1_lqdfpz.jpg" class="img-fluid rounded shadow-sm gallery-img" alt="عمل" style="height: 250px; width: 100%; object-fit: cover;" >
-        </div>        
+        </div> 
 
     </div>
   </div>
