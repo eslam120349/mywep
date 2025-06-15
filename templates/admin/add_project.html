@@ -16,6 +16,28 @@
       font-size: 3rem;
       color: #0d6efd;
     }
+
+    #upload_btn {
+  position: relative;
+  width: 120px;
+  height: 42px;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+}
+
+#upload_btn.active {
+  width: 42px;
+}
+
+#c:checked + #upload_app #arrow:before {
+  animation: _a ...
+}
+
+#upload_btn.active #arrow:before {
+  animation: _a 0.4s ease 0.4s forwards, _incHeight 4s ease 1s forwards;
+}
+
 {% endblock %}
 
 {% block content %}
@@ -43,5 +65,16 @@
 </button>
 </form>
 
-
+{% block scripts %}<script>
+  document.getElementById('upload_btn').addEventListener('click', function () {
+    this.classList.add('active');
+  });
+</script>
+{% endblock %}
+{% endblock %}
+{% block scripts %}<script>
+  document.getElementById('upload_btn').addEventListener('click', function () {
+    this.classList.add('active');
+  });
+</script>
 {% endblock %}
